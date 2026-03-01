@@ -3,138 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8 Mart Mübarək, Duyğu ❤️</title>
+    <title>Yaxşı ki Varsan, Fatimə 💫</title>
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background: #fff0f3; text-align: center; color: #ad1457; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .box { background: white; padding: 40px; border-radius: 40px; box-shadow: 0 15px 50px rgba(216, 27, 96, 0.15); max-width: 90%; width: 450px; position: relative; z-index: 10; border: 2px solid #f8bbd0; }
+        :root { --main-purple: #9c27b0; --light-purple: #f3e5f5; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--light-purple); text-align: center; color: #4a148c; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
+        
+        /* Məktub qutusu daha böyükdür */
+        .box { background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 40px; box-shadow: 0 15px 50px rgba(156, 39, 176, 0.2); max-width: 95%; width: 500px; position: relative; z-index: 5; border: 2px solid #e1bee7; }
+        
         .step { display: none; }
-        .active { display: block; animation: fadeInBlur 1.2s ease-out; }
-        @keyframes fadeInBlur { from { opacity: 0; filter: blur(10px); transform: translateY(20px); } to { opacity: 1; filter: blur(0); transform: translateY(0); } }
-        h2 { font-size: 26px; margin-bottom: 25px; color: #d81b60; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
-        p { font-size: 18px; line-height: 1.5; color: #555; }
-        button { background: #d81b60; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; margin: 10px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3); }
-        button:hover { transform: scale(1.1); background: #ad1457; }
-        .option-btn { background: #fce4ec; color: #ad1457; border: 1px solid #f8bbd0; box-shadow: none; }
-        #runBtn { position: absolute; font-size: 30px; border-radius: 50%; padding: 15px; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; left: 40%; }
-        .letter-box { text-align: left; font-size: 16px; line-height: 1.8; color: #333; max-height: 400px; overflow-y: auto; padding: 20px; background: #fffafa; border-radius: 20px; border-left: 4px solid #d81b60; animation: typeWriter 2s steps(40); }
-        .heart-bg { position: fixed; color: #f06292; font-size: 20px; animation: float 6s linear infinite; z-index: 1; opacity: 0.6; pointer-events: none; }
-        @keyframes float { 0% { transform: translateY(110vh) rotate(0); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
-        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #d81b60; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .active { display: block; animation: slideUp 0.8s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        h2 { color: var(--main-purple); margin-bottom: 20px; font-size: 24px; }
+        button { background: var(--main-purple); color: white; border: none; padding: 14px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 10px; transition: 0.3s; width: 85%; position: relative; z-index: 10; }
+        .wrong-opt { background: #f3e5f5; color: #7b1fa2; border: 1px solid #ce93d8; }
+        
+        /* Animasiyalar həm arxada, həm öndə (z-index: 20) */
+        .anim-item { position: fixed; pointer-events: none; z-index: 20; opacity: 0.7; animation: floatAnim linear infinite; }
+        @keyframes floatAnim { 0% { transform: translateY(110vh) rotate(0); } 100% { transform: translateY(-10vh) rotate(360deg); } }
+        
+        /* Yazılar bir az daha balacadır ki, emojilərə yer qalsın */
+        .letter-content { text-align: left; font-size: 14px; line-height: 1.6; color: #333; max-height: 450px; overflow-y: auto; padding: 25px; background: rgba(250, 250, 250, 0.8); border-radius: 20px; border-top: 5px solid var(--main-purple); }
+        .cat-icon { font-size: 50px; margin-bottom: 10px; }
+        b { color: var(--main-purple); }
     </style>
 </head>
 <body>
 
+<div id="animation-container"></div>
+
 <div class="box">
     <div class="step active" id="step1">
-        <h2>Salam, Enerji Bombası! ✨</h2>
-        <p>Sənin üçün kiçik bir səyahət hazırlamışam. Başlamaq üçün düyməyə toxun.</p>
-        <button onclick="nextStep(2)">Məni təəccübləndir!</button>
+        <div class="cat-icon">🐾</div>
+        <h2>Görək yaddaşın necədir?</h2>
+        <p>Səncə biz hansı tarixdə tanış olmuşuq?</p>
+        <button class="wrong-opt" onclick="alert('Yox, bu deyil! Bir az da düşün 😉')">26 İyul 2024</button>
+        <button onclick="nextStep(2)">17 İyun 2024</button>
+        <button class="wrong-opt" onclick="showMemText()">Xatırlamıramm...</button>
+        <p id="mem-text" style="display:none; color: #9c27b0; font-style: italic; margin-top: 10px;">İnan məndə xatırlamıram fatiməm.. amma əsas odur ki, tanışıq! ❤️</p>
     </div>
 
     <div class="step" id="step2">
-        <h2>Bu Ürəyi Tutmalısan! ❤️</h2>
-        <p>Sənin kimi cəld biri üçün bu asan olmalıdır, yoxsa yox?</p>
-        <div style="height: 200px; position: relative; margin-top: 20px;">
-            <button id="runBtn" onmouseover="runAway()" onclick="catchMe()">❤</button>
-        </div>
-        <p id="runStatus" style="font-size: 14px; color: #d81b60; margin-top: 10px;"></p>
+        <div class="cat-icon">🐈</div>
+        <h2>Hər şey necə başladı?</h2>
+        <p>O ilk "Salam" necə gəldi?</p>
+        <button class="wrong-opt" onclick="alert('Buna bənzəyir, amma tam bu deyil! ✨')">Təsadüfi bir Instagram yorumu</button>
+        <button onclick="nextStep(3)">Instagram'da pişik storysinə yanıt</button>
+        <button class="wrong-opt" onclick="alert('Bu ancaq kinolarda olar! 😂')">Yolda qarşılaşdıq və toqquşduq</button>
     </div>
 
     <div class="step" id="step3">
-        <h2>Xatirələr Yüklənir...</h2>
-        <div class="loader"></div>
-        <p id="loadingText">Bizim keçirdiyimiz 10 gün analiz edilir...</p>
-        <button id="loadingBtn" style="display:none;" onclick="nextStep(4)">Davam et</button>
+        <div class="cat-icon">✨</div>
+        <h2>Bacı Effekti... 💛</h2>
+        <p>Sən mənim həyatımda sadəcə bir dost deyilsən, sən bir enerji qaynağısan.</p>
+        <button onclick="nextStep(4)">Sənə bir sözüm var...</button>
     </div>
 
     <div class="step" id="step4">
-        <h2>Bir Sual... 🧠</h2>
-        <p>Səncə, bizim ortaq hekayəmiz hansı tarixdə rəngləndi?</p>
-        <button class="option-btn" onclick="wrongDate(this)">20 Fevral</button>
-        <button onclick="nextStep(5)">26 Fevral</button>
-        <button class="option-btn" onclick="wrongDate(this)">1 Mart</button>
-    </div>
-
-    <div class="step" id="step5">
-        <h2 style="font-size: 20px;">Biz artıq <span style="font-size: 40px;">10</span> gündür tanışıq! 💞</h2>
-        <div class="letter-box">
-            Mənim enerjili və səmimi <b>Duyğum</b>,<br><br>
-            Həyatımda olduğun bu <b>10 gün</b> ərzində sənin o hiperaktiv və müsbət enerjin mənə o qədər xoş təsir etdi ki, hər günün necə keçdiyini hiss etmədim. Sən sadəcə bir tanış deyil, hər anı maraqlı edən birisən.<br><br>
-            <b>26 Fevral</b> tarixinə qədər hər şey adi idi, amma həmin gündən bəri sənin gülüşün və səmimiyyətin mənim üçün hər şeyi dəyişdi. Sənin o sönməyən enerjin qarşısında heyran qalmamaq mümkün deyil.<br><br>
-            Bu gün 8 Martdır – sənin günündür. Arzu edirəm ki, o daxilindəki enerji heç vaxt sönməsin və hər zaman belə səmimi qalasan. Səninlə bu yolu getmək mənim üçün çox xoşdur.<br><br>
-            Yaxşı ki, varsan və yaxşı ki, o enerjinlə həyatıma rəng qatdın.<br><br>
-            Bayramın mübarək! ❤️<br><br>
-            <i>— Sənin Məhəmmədin</i>
+        <h2 style="font-size: 20px;">Təşəkkür edirəm, Fatimə 💫</h2>
+        <div class="letter-content">
+            Sənə bir az uzun, amma ürəkdən bir təşəkkür yazmaq istədim. Sən sadəcə dost deyil, mənim həyatımda “bacı effekti” yaradan əvəzsiz insansan. Dar günlərimdə yanımda olmağın, yaxşı günlərimi daha da möhtəşəm etməyin, hətta mənim ağzımdan çıxan ən qəribə sözlərə belə gülməyin… bunların hamısı mənim üçün böyük bir dəyərdir. 🙏<br><br>
+            Sən elə bir insansan ki, yanında olarkən həm rahat oluram, həm də “hə, bu qız güləndə dünya bir az daha yaxşı görünür” deyirəm. 😂 Hər söhbətimizdən sonra mənə enerji gəlir, hər zarafatın günümü işıqlandırır. Həyatın enişli-yoxuşlu yollarında səninlə olmaq, səninlə paylaşmaq mənə həqiqətən çox şey öyrədib və hər anı əyləncəli edib.<br><br>
+            Təşəkkür edirəm, <b>Fatimə 💛</b>. Hər zaman olduğun kimi qal, hər zaman gül, hər zaman yanımda ol, çünki sən yanımda olanda hər şey daha rahat və daha əyləncəli olur. Mən də bil ki, sənə hər zaman dəstək olacağam, lazım olsa yanında qucaq açmağa da hazıram 😏.<br><br>
+            Sən yalnız dost deyilsən, həm də həyatımın stabil enerji qaynağı, bacım, ən yaxşı komediya ortağım və sadəcə… Fatimə 💫.
         </div>
     </div>
 </div>
 
 <script>
-    let attempts = 0;
-    const statusMessages = [
-        "Bir az da cəld!",
-        "Demək olar ki, tutmuşdun!",
-        "Vay, sən həqiqətən enerjilisən!",
-        "Yaxşı, təslim oluram, tut məni!"
-    ];
-
-    function nextStep(step) {
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        const next = document.getElementById('step' + step);
-        next.classList.add('active');
-
-        if(step === 3) {
-            setTimeout(() => {
-                document.getElementById('loadingText').innerText = "Analiz tamamlandı! 26 Fevraldan bəri hər şey mükəmməldir.";
-                document.getElementById('loadingBtn').style.display = "inline-block";
-            }, 3000);
-        }
+    function nextStep(s) {
+        document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+        document.getElementById('step' + s).classList.add('active');
     }
 
-    function runAway() {
-        if (attempts < 5) {
-            const btn = document.getElementById('runBtn');
-            const x = Math.random() * (window.innerWidth < 400 ? 50 : 80);
-            const y = Math.random() * 70;
-            btn.style.left = x + '%';
-            btn.style.top = y + '%';
-            
-            if(statusMessages[attempts]) {
-                document.getElementById('runStatus').innerText = statusMessages[attempts];
-            }
-            attempts++;
-        }
+    function showMemText() {
+        document.getElementById('mem-text').style.display = 'block';
+        setTimeout(() => nextStep(2), 3000);
     }
 
-    function catchMe() {
-        if (attempts >= 5) {
-            nextStep(3);
-        } else {
-            runAway();
-        }
+    function createAnimationItems() {
+        const container = document.getElementById('animation-container');
+        // Ürəklərin sayını artırdım
+        const items = ['❤️', '💖', '💝', '💕', '💗', '🐱', '🐈', '🐾'];
+        const item = document.createElement('div');
+        item.className = 'anim-item';
+        item.innerHTML = items[Math.floor(Math.random() * items.length)];
+        item.style.left = Math.random() * 100 + 'vw';
+        item.style.animationDuration = (Math.random() * 4 + 3) + 's';
+        item.style.fontSize = (Math.random() * 25 + 15) + 'px';
+        container.appendChild(item);
+        setTimeout(() => item.remove(), 7000);
     }
-
-    function wrongDate(btn) {
-        btn.style.background = "#ffcdd2";
-        btn.innerText = "Yox, bu deyil! ❌";
-        setTimeout(() => {
-            btn.style.background = "#fce4ec";
-            btn.innerText = btn.getAttribute('data-orig') || btn.innerText;
-        }, 1000);
-    }
-
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.classList.add("heart-bg");
-        heart.innerHTML = "❤";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-        document.body.appendChild(heart);
-        setTimeout(() => { heart.remove(); }, 6000);
-    }
-    setInterval(createHeart, 400);
+    // Daha sıx animasiya üçün intervalı 200ms etdim
+    setInterval(createAnimationItems, 200);
 </script>
 
 </body>
