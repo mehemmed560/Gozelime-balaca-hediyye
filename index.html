@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Mart Mübarək, Duyğu ❤️</title>
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background: linear-gradient(135deg, #fce4ec, #ffffff); text-align: center; color: #ad1457; overflow-x: hidden; }
+        .container { padding: 50px 20px; }
+        .name { background: linear-gradient(45deg, #ec407a, #f48fb1); -webkit-background-clip: text; color: transparent; font-weight: bold; animation: glow 2s infinite alternate; }
+        @keyframes glow { from { text-shadow: 0 0 5px #f48fb1; } to { text-shadow: 0 0 20px #d81b60; } }
+        .counter { margin-top: 15px; font-size: 18px; color: #880e4f; background: rgba(255, 255, 255, 0.6); display: inline-block; padding: 10px 25px; border-radius: 30px; border: 1px solid #f8bbd0; }
+        .letter-btn { margin-top: 40px; padding: 18px 35px; border: none; border-radius: 50px; background: #d81b60; color: white; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(216, 27, 96, 0.4); transition: 0.3s; }
+        .letter-btn:active { transform: scale(0.9); }
+        .letter { max-width: 550px; margin: 30px auto; background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px; display: none; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); line-height: 1.8; text-align: left; font-size: 16px; animation: fadeIn 1.2s ease-in; color: #4a4a4a; border-left: 5px solid #ec407a; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .heart { position: fixed; color: #f06292; font-size: 20px; animation: float 5s linear infinite; z-index: -1; user-select: none; }
+        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+        b { color: #d81b60; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>8 Martın Mübarək, <span class="name">Duyğu</span> ❤️</h1>
+    <div class="counter" id="daysTogether">Hesablanır...</div>
+    <br>
+    <button class="letter-btn" id="mainBtn" onclick="openLetter()">Məktubu Oxu və Dinlə 🎵</button>
+
+    <div class="letter" id="loveLetter">
+        Artıq <b>10 gündür</b> ki, həyatımda sən varsan və hər gün sənin gülüşünü, enerjini daha çox sevirəm. Sən hiperaktiv, gülərüz və səmimi biri olduğun üçün, yanında olmaq insana xoşbəxtlik verir.<br><br>
+        Səninlə keçirdiyim hər dəqiqə sadəcə əyləncə deyil, həm də ürəkdən bir bağ yaradır. <b>26 fevral</b> mənim üçün artıq adi bir tarix deyil – o gün səninlə tanış oldum və həyat bir az daha rəngli oldu.<br><br>
+        Bu 10 gün içində çox şey öyrəndim: sən yanında olmaqla dünyanı daha gözəl görməyə imkan verirsən. Hər gülüşün, hər enerji dolu anın mənim üçün qiymətlidir.<br><br>
+        8 Mart — Beynəlxalq Qadınlar Günü münasibətilə sənə arzu edirəm ki, həmişə bu qədər xoşbəxt, gülərüz və enerjili olasan. Yanında olmağa davam etmək isə mənim üçün böyük şərəfdir. 🤍<br><br>
+        Yaxşı ki, sən varsın, <b>Duyğu</b>.<br><br>
+        <i>— Məhəmməd</i>
+    </div>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="https://files.catbox.moe/6r8vj0.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    // Tarixi 26 fevral 2026-cı il olaraq tənzimlədik
+    const startDate = new Date(2026, 1, 26); 
+    
+    function updateCounter() {
+        const today = new Date();
+        const diff = today - startDate;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("daysTogether").innerHTML = "Biz artıq <b>" + days + "</b> gündür birlikdəyik 💞";
+    }
+    updateCounter();
+
+    function openLetter() {
+        document.getElementById("loveLetter").style.display = "block";
+        var audio = document.getElementById("bgMusic");
+        audio.play();
+        document.getElementById("mainBtn").style.display = "none";
+    }
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => { heart.remove(); }, 5000);
+    }
+    setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
